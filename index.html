@@ -10,13 +10,13 @@
 <body>
     <!-- Full-Screen Click Me Banner -->
     <div id="overlay" class="overlay">
-        <p>Click Me to Enter</p>
+        <p>click</p>
     </div>
 
     <video id="bg-video" muted loop preload="auto">
         <source src="/resources/nett.mp4" type="video/mp4">
     </video>
-    <audio id="bg-audio" loop muted preload="auto">
+    <audio id="bg-audio" loop preload="auto">
         <source src="/resources/Veridis_Quo.mp3" type="audio/mp3">
     </audio>
 
@@ -70,9 +70,22 @@
             // Unmute and play the video and audio
             video.muted = false;  // Unmute video
             audio.muted = false;  // Unmute audio
-            video.play();         // Play the video
-            audio.play();         // Play the audio
+            
+            // Play video and audio with a delay to ensure both start properly
+            setTimeout(() => {
+                video.play();         // Play the video
+                audio.play();         // Play the audio
+            }, 100); // Adding a small delay to make sure autoplay works correctly
         });
+
+        // Check if audio is playing, if not trigger play
+        audio.onplay = () => {
+            console.log("Audio started playing!");
+        };
+
+        audio.onerror = (e) => {
+            console.error("Error playing audio:", e);
+        };
     </script>
 </body>
 </html>
