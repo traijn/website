@@ -120,3 +120,47 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+/* Full-Screen Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.overlay p {
+    margin: 0;
+    font-family: Consolas, monospace;
+}
+
+/* Video Styles */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* Hidden initially */
+}
+
+/* Audio Styles */
+#bg-audio {
+    display: none; /* Audio is hidden, but playing */
+}
+
+/* Optional: Hover effect for overlay */
+.overlay:hover {
+    background-color: rgba(0, 0, 0, 1);
+}

@@ -8,10 +8,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <video autoplay muted loop id="bg-video">
+    <!-- Full-Screen Click Me Banner -->
+    <div id="overlay" class="overlay">
+        <p>Click Me to Enter</p>
+    </div>
+
+    <video id="bg-video" muted loop preload="auto">
         <source src="/resources/nett.mp4" type="video/mp4">
     </video>
-    <audio autoplay loop id="bg-audio">
+    <audio id="bg-audio" loop muted preload="auto">
         <source src="/resources/Veridis_Quo.mp3" type="audio/mp3">
     </audio>
 
@@ -35,7 +40,9 @@
             </div>
         </div>
     </div>
+
     <script>
+        // Mousemove interaction to rotate the div
         document.addEventListener("mousemove", (e) => {
             const div = document.getElementById("interactive-div");
             const { clientX: x, clientY: y } = e;
@@ -46,6 +53,25 @@
             const rotateX = deltaY * 10;
             const rotateY = deltaX * -10;
             div.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        // Show the overlay and play media on click
+        const overlay = document.getElementById("overlay");
+        const video = document.getElementById("bg-video");
+        const audio = document.getElementById("bg-audio");
+
+        overlay.addEventListener("click", () => {
+            // Hide the overlay
+            overlay.style.display = "none";
+
+            // Ensure the video element is visible
+            video.style.display = "block"; // Show video
+
+            // Unmute and play the video and audio
+            video.muted = false;  // Unmute video
+            audio.muted = false;  // Unmute audio
+            video.play();         // Play the video
+            audio.play();         // Play the audio
         });
     </script>
 </body>
