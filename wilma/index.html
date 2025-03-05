@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--Estää yhteensopivuusnäkymät IE:llä-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#0974b3">
+    <title>Wilmaan kirjautuminen - Wilma - Helsingin kaupunki</title>
+    <link href="https://cdn.inschool.fi/2.35.6.1/nc3/css/bootstrap.min.css" rel="StyleSheet" type="text/css">
+    <link href="https://cdn.inschool.fi/2.35.6.1/nc3/css/nc.min.css" rel="StyleSheet" type="text/css">
+    <link href="https://cdn.inschool.fi/2.35.6.1/nc3/WIP/datepicker/datepicker.css" rel="StyleSheet" type="text/css">
+    <link href="https://cdn.inschool.fi/2.35.6.1/styles/vendor/bootstrap-slider.min.css" rel="StyleSheet" type="text/css">
+    <link href="https://cdn.inschool.fi/2.35.6.1/styles/wilma.css" rel="StyleSheet" type="text/css">
+    <link href="https://cdn.inschool.fi/2.35.6.1/styles/vendor/react-datepicker.min.css" rel="StyleSheet" type="text/css">
+    <link href="https://cdn.inschool.fi/2.35.6.1/styles/wilma-brand-renewal/img/wilma-favicon.png" rel="icon" type="image/png" sizes="any">
+    <link href="https://cdn.inschool.fi/2.35.6.1/styles/wilma-brand-renewal/img/wilma-favicon.svg" rel="icon" type="image/svg+xml">
+</head>
+
+<body class="nobody">
+    <nav class="navbar navbar-default nav-wilma">
+        <div class="navbar-header pull-left">
+            <a class="pull-left" id="skipnav" href="index.html#main-content" autofocus>Siirry sivun pääsisältöön</a>
+            <a class="navbar-brand" style="padding-right: 40px" href="index.html"><img class="wilma-logo"
+                    src="https://cdn.inschool.fi/2.35.6.1/styles/wilma-brand-renewal/img/wilma_logo.svg"
+                    alt="Wilma Logo">
+            </a>
+        </div>
+        <div class="pull-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="icon dropdown dropdown-fix">
+                    <a href="index.html" data-toggle="dropdown" role="button" title="Kieli">
+                        <span class="vismaicon vismaicon-menu vismaicon-user-settings"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header">Kieli</li>
+                        <li role="presentation"><a href="/language/suomi/">Suomi</a></li>
+                        <li role="presentation"><a href="/language/svenska/">Svenska</a></li>
+                        <li role="presentation"><a href="/language/english">English</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="alerts" class="container"></div>
+
+    <main id="main-content">
+        <div class="container-fluid multicol">
+            <div class="row">
+                <div class="right col-md-4 col-md-push-8">
+                    <div class="panel resp-box">
+                        <div class="panel-body margin-side margin-top-inline">
+                            <h1>
+                                <span class="vismaicon vismaicon-unlocked"></span>
+                                Kirjaudu sisään
+                            </h1>
+                            <form action="https://helsinki.inschool.fi/login" id="loginForm" method="post" target="_top"
+                                class="login-form">
+                                <div class="row margin-bottom-inline">
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <input id="login-frontdoor" type="text" name="Login" value=""
+                                                class="form-control focusonload" placeholder="Käyttäjätunnus">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row margin-bottom-inline">
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <input type="password" id="password" name="Password" value=""
+                                                class="form-control" placeholder="Salasana">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row margin-bottom-inline">
+                                    <div class="col-xs-12">
+                                        <input type="submit" name="submit" value="Kirjaudu sisään"
+                                            class="btn btn-primary form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <a class="pull-right" href="">Unohditko salasanasi?</a>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="token" name="SESSIONID" value="">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="left col-md-8 col-md-pull-4">
+                    <div class="alert alert-sm margin-bottom-inline" role="alert">
+                        <span class="vismaicon vismaicon-filled vismaicon-info"></span>
+                        <p>
+                            <a href=""><strong>Ohje Wilma-tunnuksen luomiseksi</strong></a>
+                        </p>
+                    </div>
+                    <div class="alert alert-sm margin-bottom-inline" role="alert">
+                        <span class="vismaicon vismaicon-filled vismaicon-info"></span>
+                        <p>
+                            <a href=""><strong>Wilman saavutettavuusseloste</strong></a>
+                        </p>
+                    </div>
+                    <div class="alert alert-sm margin-bottom-inline" role="alert">
+                        <span class="vismaicon vismaicon-filled vismaicon-info"></span>
+                        <p>
+                            <a href=""><strong>Rekisteriselosteet</strong></a>
+                        </p>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-body">
+                            <h1>Mikä Wilma on?</h1>
+                            <div class="padding-bottom-inline">
+                                <p>Wilma on oppilaitoksen hallinto-ohjelman www-liittymä. Tämän Wilma-lisenssin omistaa <b>Helsingin kaupunki</b>.</p>
+                                <p>Opiskelijat valitsevat Wilmassa kursseja, seuraavat suorituksiaan, lukevat tiedotteita ja viestivät opettajien kanssa.</p>
+                                <p>Opettajat syöttävät Wilman kautta arvioinnit ja poissaolot, päivittävät henkilötietojaan ja viestivät opiskelijoiden ja huoltajien kanssa.</p>
+                                <p>Huoltajat seuraavat ja selvittävät Wilman kautta opiskelijan poissaoloja, viestivät opettajien kanssa ja lukevat koulun tiedotteita.</p>
+                                <p>Wilmaa käyttävät myös oppilaitoksen henkilökunta, johto sekä työpaikkaohjaajat.</p>
+                                <p>Kirjaudu Wilmaan syöttämällä oikealla puolella oleviin kenttiin käyttäjätunnuksesi ja salasanasi. Paina tämän jälkeen <i>Kirjaudu sisään</i> -painiketta.</p>
+                                <p><a href="https://help.inschool.fi/HOP/fi/Kayttajaoikeudet-ja-tunnukset/Wilma-tunnukset/Wilma-tunnukset-FAQ.htm" target="blank">Usein kysytyt kysymykset</a></p>
+                                <p><a href="https://help.inschool.fi/HOP/fi/Kayttoliittyma-yllapito-ja-sovellukset/Wilman-peruskayttoon-liittyvat-ohjeet/Wilman-pikaohje-huoltajille.htm" target="blank">Wilman huoltajaliittymän toiminnot</a></p>
+                            </div>
+                            <h3 class="margin-top-inline">Unohditko salasanasi?</h3>
+                            <p>
+                                Jos sähköpostiosoitteesi on oppilaitoksen tiedossa, voit <a
+                                    href="">tilata uuden salasanan</a>.
+                                Muissa ongelmatilanteissa ota yhteys oppilaitokseen.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mobile-app-panel">
+                        <a href="https://itunes.apple.com/fi/app/wilma/id937159637" target="blank"><img class="mobile" src="https://cdn.inschool.fi/2.35.6.1/images/mobile_ios_fin.png" title="iTunes"></a>
+                        <a href="https://play.google.com/store/apps/details?id=fi.starsoft.wilma" target="blank"><img class="mobile" src="https://cdn.inschool.fi/2.35.6.1/images/mobile_android_fin.png" title="Google Play"></a>
+                    </div>
+                    <p class="small">
+                        Wilma 2.35.6.1 &copy; 2000-2025 Visma
+                        <a href="https://www.wilma.fi/legal" target="blank">Lisenssit</a>
+                    </p>
+                    <p class="small">
+                        Visma ja Visma-logo ovat Visma AS:n rekisteröityjä tavaramerkkejä.
+                        Wilma ja Wilman logo ovat Visma Aquila Oy:n rekisteröityjä tavaramerkkejä.
+                        Kaikki muut tavaramerkit ovat omistajiensa omaisuutta.
+                    </p>
+                </div>
+            </div>
+            <div style="clear : both;">&#160;</div>
+        </div>
+    </main>
+    <footer class="margin-top-bottom">
+        <img src="https://cdn.inschool.fi/2.35.6.1/nc3/img/visma-logo.svg" alt="Visma Logo">
+    </footer>
+</body>
+</html>
