@@ -13,17 +13,15 @@
     </div>
 
     <video id="bg-video" muted loop preload="true">
-        <source src="/resources/nett.mp4" type="video/mp4">
+        <source id="video-source" src="" type="video/mp4">
     </video>
     <audio id="bg-audio" loop preload="true">
-        <source src="/resources/Veridis_Quo.mp3" type="audio/mp3">
-    </audio>
+        <source id="audio-source" src="" type="audio/mp3">
+    </audio>    
 
     <div class="div1" id="interactive-div">
         <div class="container">
-            <p>i speak: 🇩🇪, 🇨🇭, 🇫🇮 and 🇬🇧, but i want to learn more.</p>
-            <p>i like to play cs2 and listen to music, else there isn't much to say about me.</p>
-            <p>if you <em>do</em> want to contact me, feel free to do so on discord, my username is <b>@traindeer</b>.</p>
+            <p>if you want to contact me, feel free to do so on discord, my username is <b>@traindeer</b>.</p>
             <p>къде отиваш?</p>
             <div class="social-icons">
                 <a href="https://discord.com/users/1193474968193863761" target="_blank">
@@ -38,42 +36,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        document.addEventListener("mousemove", (e) => {
-            const div = document.getElementById("interactive-div");
-            const { clientX: x, clientY: y } = e;
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-            const deltaX = (x - centerX) / centerX;
-            const deltaY = (y - centerY) / centerY;
-            const rotateX = deltaY * 10;
-            const rotateY = deltaX * -10;
-            div.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-
-        const overlay = document.getElementById("overlay");
-        const video = document.getElementById("bg-video");
-        const audio = document.getElementById("bg-audio");
-
-        overlay.addEventListener("click", () => {
-            overlay.style.display = "none";
-            video.style.display = "block";
-            video.muted = false;
-            audio.muted = false;
-            setTimeout(() => {
-                video.play();
-                audio.play();
-            }, 100);
-        });
-
-        audio.onplay = () => {
-            console.log("Audio started playing!");
-        };
-
-        audio.onerror = (e) => {
-            console.error("Error playing audio:", e);
-        };
-    </script>
+    <script src="wallpaper.js"></script>
 </body>
 </html>
