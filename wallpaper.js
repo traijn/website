@@ -61,8 +61,8 @@ document.addEventListener("mousemove", (e) => {
     const centerY = window.innerHeight / 2;
     const deltaX = (x - centerX) / centerX;
     const deltaY = (y - centerY) / centerY;
-    const rotateX = deltaY * 10;
-    const rotateY = deltaX * -10;
+    const rotateX = deltaY * 13;
+    const rotateY = deltaX * -13;
     div.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 });
 
