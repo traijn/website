@@ -40,7 +40,6 @@
     </div>
 
     <script>
-        // Mousemove interaction to rotate the div
         document.addEventListener("mousemove", (e) => {
             const div = document.getElementById("interactive-div");
             const { clientX: x, clientY: y } = e;
@@ -53,30 +52,21 @@
             div.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
 
-        // Show the overlay and play media on click
         const overlay = document.getElementById("overlay");
         const video = document.getElementById("bg-video");
         const audio = document.getElementById("bg-audio");
 
         overlay.addEventListener("click", () => {
-            // Hide the overlay
             overlay.style.display = "none";
-
-            // Ensure the video element is visible
-            video.style.display = "block"; // Show video
-
-            // Unmute and play the video and audio
-            video.muted = false;  // Unmute video
-            audio.muted = false;  // Unmute audio
-            
-            // Play video and audio with a delay to ensure both start properly
+            video.style.display = "block";
+            video.muted = false;
+            audio.muted = false;
             setTimeout(() => {
-                video.play();         // Play the video
-                audio.play();         // Play the audio
-            }, 100); // Adding a small delay to make sure autoplay works correctly
+                video.play();
+                audio.play();
+            }, 100);
         });
 
-        // Check if audio is playing, if not trigger play
         audio.onplay = () => {
             console.log("Audio started playing!");
         };
