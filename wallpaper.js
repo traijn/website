@@ -43,8 +43,8 @@ function changeWallpaperAndMusic() {
     const songCover = document.getElementById("song-cover");
 
     const date = new Date();
-    //const day = date.getDay();
-    const day = 5;
+    const day = date.getDay();
+    //const day = 5;
     const filePath = `/resources/aboutme/${["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][day]}.mp3`;
 
     videoSource.src = filePath.replace(".mp3", ".mp4");
