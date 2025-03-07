@@ -1,59 +1,3 @@
-// Change wallpaper and music based on the weekday
-function changeWallpaperAndMusic() {
-    const video = document.getElementById("bg-video");
-    const audio = document.getElementById("bg-audio");
-    const videoSource = document.getElementById("video-source");
-    const audioSource = document.getElementById("audio-source");
-
-    //const date = new Date();
-    //const day = date.getDay();  // Get the weekday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
-    //const day = 1;  // For testing purposes
-    // Set video and audio based on the day of the week
-    switch(day) {
-        case 0:  // Sunday
-            videoSource.src = "/resources/aboutme/sunday.mp4";
-            audioSource.src = "/resources/aboutme/sunday.mp3";
-            break;
-        case 1:  // Monday
-            videoSource.src = "/resources/aboutme/monday.mp4";
-            audioSource.src = "/resources/aboutme/monday.mp3";
-            break;
-        case 2:  // Tuesday
-            videoSource.src = "/resources/aboutme/tuesday.mp4";
-            audioSource.src = "/resources/aboutme/tuesday.mp3";
-            break;
-        case 3:  // Wednesday
-            videoSource.src = "/resources/aboutme/wednesday.mp4";
-            audioSource.src = "/resources/aboutme/wednesday.mp3";
-            break;
-        case 4:  // Thursday
-            videoSource.src = "/resources/aboutme/thursday.mp4";
-            audioSource.src = "/resources/aboutme/thursday.mp3";
-            break;
-        case 5:  // Friday
-            videoSource.src = "/resources/aboutme/friday.mp4";
-            audioSource.src = "/resources/aboutme/friday.mp3";
-            break;
-        case 6:  // Saturday
-            videoSource.src = "/resources/aboutme/saturday.mp4";
-            audioSource.src = "/resources/aboutme/saturday.mp3";
-            break;
-        default:
-            // Fallback
-            videoSource.src = "/resources/aboutme/monday.mp4";
-            audioSource.src = "/resources/aboutme/monday.mp3";
-            break;
-    }
-
-    // Reload the video and audio sources
-    video.load();
-    audio.load();
-}
-
-// Run the function when the page loads
-window.onload = changeWallpaperAndMusic;
-
-// Mouse interaction for the floating div
 document.addEventListener("mousemove", (e) => {
     const div = document.getElementById("interactive-div");
     const { clientX: x, clientY: y } = e;
@@ -100,7 +44,7 @@ function changeWallpaperAndMusic() {
 
     const date = new Date();
     const day = date.getDay();
-    //const day = 4; //For testing purposes 
+    //const day = 4;
     const filePath = `/resources/aboutme/${["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][day]}.mp3`;
 
     videoSource.src = filePath.replace(".mp3", ".mp4");
@@ -127,14 +71,14 @@ function changeWallpaperAndMusic() {
                         let imageUrl = `data:${picture.format};base64,${btoa(base64String)}`;
                         songCover.src = imageUrl;
                     } else {
-                        songCover.src = "resources/default-cover.png"; // Fallback
+                        songCover.src = "resources/default-cover.png";
                     }
                 },
                 onError: function(error) {
                     console.error("error reading metadata:", error);
                     songTitle.textContent = "unkown title";
                     songArtist.textContent = "unkown artist";
-                    songCover.src = "resources/default-cover.png"; // Fallback
+                    songCover.src = "resources/default-cover.png";
                 }
             });
         })
@@ -143,21 +87,22 @@ function changeWallpaperAndMusic() {
         });
 }
 
-// Run the function when the page loads
-window.onload = changeWallpaperAndMusic;
-
 document.addEventListener("DOMContentLoaded", async function () {
     const bibleParagraph = document.querySelector("p.bible");
     
     try {
         const response = await fetch("https://bible-api.com/?random=verse");
-        if (!response.ok) throw new Error("failed to fetch Bible verse");
+        if (!response.ok) throw new Error("failed to fetch bible verse");
         
         const data = await response.json();
         //bibleParagraph.textContent = `${data.reference}: ${data.text}`;
         bibleParagraph.textContent = `${data.text}`.toLowerCase();
     } catch (error) {
-        console.error("error fetching Bible verse:", error);
-        bibleParagraph.textContent = "failed to load Bible verse.";
+        console.error("error fetching bible verse:", error);
+        bibleParagraph.textContent = "failed to load bible verse.";
     }
 });
+
+window.onload = function() {
+    changeWallpaperAndMusic();
+};
