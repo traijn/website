@@ -145,3 +145,19 @@ function changeWallpaperAndMusic() {
 
 // Run the function when the page loads
 window.onload = changeWallpaperAndMusic;
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const bibleParagraph = document.querySelector("p.bible");
+    
+    try {
+        const response = await fetch("https://bible-api.com/?random=verse");
+        if (!response.ok) throw new Error("failed to fetch Bible verse");
+        
+        const data = await response.json();
+        //bibleParagraph.textContent = `${data.reference}: ${data.text}`;
+        bibleParagraph.textContent = `${data.text}`.toLowerCase();
+    } catch (error) {
+        console.error("error fetching Bible verse:", error);
+        bibleParagraph.textContent = "failed to load Bible verse.";
+    }
+});
