@@ -63,6 +63,10 @@ body {
     box-shadow: var(--box-shadow);
     transition: transform 0.75s ease-out;
     box-shadow: #ffffff 0 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .div1:hover {
@@ -317,4 +321,32 @@ b {
 .snowflake:nth-of-type(11) {
     left: 65%;
     animation-delay: 2.5s
+}
+
+.song-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.song-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.song-details {
+    color: white;
+    font-family: Consolas, monospace;
+    flex-grow: 1;
+}
+
+.song-details p {
+    margin: 0;
+    font-size: 14px;
 }

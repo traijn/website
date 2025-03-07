@@ -5,9 +5,9 @@ function changeWallpaperAndMusic() {
     const videoSource = document.getElementById("video-source");
     const audioSource = document.getElementById("audio-source");
 
-    const date = new Date();
-    const day = date.getDay();  // Get the weekday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
-
+    //const date = new Date();
+    //const day = date.getDay();  // Get the weekday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+    //const day = 1;  // For testing purposes
     // Set video and audio based on the day of the week
     switch(day) {
         case 0:  // Sunday
@@ -39,7 +39,7 @@ function changeWallpaperAndMusic() {
             audioSource.src = "/resources/aboutme/saturday.mp3";
             break;
         default:
-            // Fallback (should never happen)
+            // Fallback
             videoSource.src = "/resources/aboutme/monday.mp4";
             audioSource.src = "/resources/aboutme/monday.mp3";
             break;
@@ -88,3 +88,60 @@ audio.onplay = () => {
 audio.onerror = (e) => {
     console.error("Error playing audio:", e);
 };
+
+function changeWallpaperAndMusic() {
+    const video = document.getElementById("bg-video");
+    const audio = document.getElementById("bg-audio");
+    const videoSource = document.getElementById("video-source");
+    const audioSource = document.getElementById("audio-source");
+    const songTitle = document.getElementById("song-title");
+    const songArtist = document.getElementById("song-artist");
+    const songCover = document.getElementById("song-cover");
+
+    const date = new Date();
+    //const day = date.getDay();
+    const day = 4; //For testing purposes 
+    const filePath = `/resources/aboutme/${["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][day]}.mp3`;
+
+    videoSource.src = filePath.replace(".mp3", ".mp4");
+    audioSource.src = filePath;
+
+    video.load();
+    audio.load();
+
+    // Fetch the MP3 file as an ArrayBuffer and extract metadata
+    fetch(filePath)
+        .then(response => response.arrayBuffer())
+        .then(buffer => {
+            jsmediatags.read(new Blob([buffer]), {
+                onSuccess: function(tag) {
+                    songTitle.textContent = tag.tags.title || "Unknown Title";
+                    songArtist.textContent = tag.tags.artist || "Unknown Artist";
+
+                    if (tag.tags.picture) {
+                        let picture = tag.tags.picture;
+                        let base64String = "";
+                        for (let i = 0; i < picture.data.length; i++) {
+                            base64String += String.fromCharCode(picture.data[i]);
+                        }
+                        let imageUrl = `data:${picture.format};base64,${btoa(base64String)}`;
+                        songCover.src = imageUrl;
+                    } else {
+                        songCover.src = "resources/default-cover.png"; // Fallback
+                    }
+                },
+                onError: function(error) {
+                    console.error("error reading metadata:", error);
+                    songTitle.textContent = "unkown title";
+                    songArtist.textContent = "unkown artist";
+                    songCover.src = "resources/default-cover.png"; // Fallback
+                }
+            });
+        })
+        .catch(error => {
+            console.error("Failed to load MP3 file:", error);
+        });
+}
+
+// Run the function when the page loads
+window.onload = changeWallpaperAndMusic;
