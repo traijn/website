@@ -44,16 +44,43 @@ function changeWallpaperAndMusic() {
 
     const date = new Date();
     const day = date.getDay();
-    //const day = 5;
     const filePath = `/resources/aboutme/${["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][day]}.mp3`;
 
-    videoSource.src = filePath.replace(".mp3", ".mp4");
     audioSource.src = filePath;
-
-    video.load();
     audio.load();
 
-    // Fetch the MP3 file as an ArrayBuffer and extract metadata
+    const videoUrl = filePath.replace(".mp3", ".mp4");
+    const mediaSource = new MediaSource();
+    video.src = URL.createObjectURL(mediaSource);
+
+    mediaSource.addEventListener("sourceopen", async () => {
+        const sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.64001E"');
+        let startByte = 0;
+        const chunkSize = 1024 * 64; // 64 KB chunks
+
+        async function fetchChunk() {
+            const response = await fetch(videoUrl, {
+                headers: { Range: `bytes=${startByte}-${startByte + chunkSize - 1}` }
+            });
+
+            if (!response.ok) return;
+            const arrayBuffer = await response.arrayBuffer();
+            sourceBuffer.appendBuffer(arrayBuffer);
+
+            startByte += chunkSize;
+
+            sourceBuffer.addEventListener("updateend", () => {
+                if (response.headers.get("Content-Range")) {
+                    fetchChunk(); // Fetch next chunk
+                } else {
+                    mediaSource.endOfStream();
+                }
+            }, { once: true });
+        }
+
+        fetchChunk();
+    });
+
     fetch(filePath)
         .then(response => response.arrayBuffer())
         .then(buffer => {
@@ -76,8 +103,8 @@ function changeWallpaperAndMusic() {
                 },
                 onError: function(error) {
                     console.error("error reading metadata:", error);
-                    songTitle.textContent = "unkown title";
-                    songArtist.textContent = "unkown artist";
+                    songTitle.textContent = "Unknown Title";
+                    songArtist.textContent = "Unknown Artist";
                     songCover.src = "resources/default-cover.png";
                 }
             });
