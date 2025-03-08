@@ -29,3 +29,18 @@ document.addEventListener("DOMContentLoaded", async function () {
         randomFact.textContent = "failed to load random fact.";
     }
 });
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const randomFact = document.querySelector("p.cat");
+    
+    try {
+        const response = await fetch("https://meowfacts.herokuapp.com/");
+        if (!response.ok) throw new Error("Failed to fetch cat fact");
+        
+        const data = await response.json();
+        randomFact.textContent = data.data[0].toLowerCase();
+    } catch (error) {
+        console.error("Error fetching cat fact:", error);
+        randomFact.textContent = "Failed to load cat fact.";
+    }
+});

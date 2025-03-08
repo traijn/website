@@ -41,6 +41,7 @@ function changeWallpaperAndMusic() {
     const songTitle = document.getElementById("song-title");
     const songArtist = document.getElementById("song-artist");
     const songCover = document.getElementById("song-cover");
+    const songInfo = document.getElementById("song-info");
 
     const date = new Date();
     const day = date.getDay();
@@ -61,6 +62,7 @@ function changeWallpaperAndMusic() {
                 onSuccess: function(tag) {
                     songTitle.textContent = tag.tags.title || "Unknown Title";
                     songArtist.textContent = tag.tags.artist || "Unknown Artist";
+
 
                     if (tag.tags.picture) {
                         let picture = tag.tags.picture;

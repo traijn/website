@@ -398,3 +398,12 @@ b {
     .hidden {
         display: none;
     }
+
+.corner {
+    position: fixed;
+    bottom: 10px;
+    font-size: 12px;
+    color: white;
+    opacity: 0.7;
+    font-family: Consolas, monospace;
+    }
