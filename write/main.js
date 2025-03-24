@@ -42,3 +42,10 @@ document.addEventListener("keydown", (event) => {
         document.body.removeChild(a);
     }
 });
+
+document.addEventListener('input', function (event) {
+    if (event.target.id === 'text-area') {
+        event.target.style.height = 'auto';
+        event.target.style.height = event.target.scrollHeight + 'px';
+    }
+});
