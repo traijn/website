@@ -43,6 +43,18 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
+document.addEventListener("keydown", (event) => {
+    if (event.key === 'Tab') {
+        event.preventDefault();
+        const start = textArea.selectionStart;
+        const end = textArea.selectionEnd;
+
+        textArea.value = textArea.value.substring(0, start) + "\t" + textArea.value.substring(end);
+
+        textArea.selectionStart = textArea.selectionEnd = start + 1;
+    }
+});
+
 document.addEventListener('input', function (event) {
     if (event.target.id === 'text-area') {
         event.target.style.height = 'auto';
