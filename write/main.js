@@ -42,18 +42,45 @@ textArea.addEventListener("input", () => {
 document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && event.key === 's') {
         event.preventDefault();
-        const textContent = textArea.value.trim();
-        const firstWord = textContent.split(/\s+/)[0] || "notes";
+        if (!currentDoc) {
+            alert("No document is currently open.");
+            return;
+        }
+        setCookie(currentDoc, textArea.value.trim(), 1000);
+    } else if (event.ctrlKey && event.key === 'q') {
+        event.preventDefault();
+        let textContent = textArea.value.trim();
+        
+        if (!textContent) {
+            alert("Cannot save an empty document!");
+            return;
+        }
+
+        let docName = currentDoc;
+        if (currentDoc === "Main Page" || !currentDoc) {
+            docName = textContent.split(/\s+/).slice(0, 2).join(" ") || "New Document";
+        }
+
         const blob = new Blob([textContent], { type: "text/plain" });
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
-        a.download = `${firstWord}.txt`;
+        a.download = `${docName}.txt`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+    } else if (event.ctrlKey && event.key === 'e') {
+        event.preventDefault();
+        const newName = prompt("Enter new document name:", "");
+        if (newName) {
+            const content = getCookie(currentDoc);
+            setCookie(newName, content, 1000);
+            document.cookie = `${currentDoc}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
+            currentDoc = newName;
+            alert(`Renamed to "${newName}"`);
+        }
     } else if (event.ctrlKey && event.key === 'd') {
         event.preventDefault();
-        const docName = prompt("Enter new document name:");
+        const docName = prompt("Enter new document name:", "");
         if (docName) {
             setCookie(docName, "", 1000);
             loadDocument(docName);
@@ -73,7 +100,7 @@ document.addEventListener("keydown", (event) => {
                 const reader = new FileReader();
                 reader.onload = () => {
                     textArea.value = reader.result;
-                    setCookie(currentDoc, textArea.value, 1000);
+                    setCookie(currentDoc, textArea.value.trim(), 1000);
                 };
                 reader.readAsText(file);
             }
@@ -89,6 +116,10 @@ document.addEventListener("keydown", (event) => {
         textArea.selectionStart = textArea.selectionEnd = start + 1;
     }
 });
+
+
+
+
 
 document.addEventListener('input', function (event) {
     if (event.target.id === 'text-area') {
