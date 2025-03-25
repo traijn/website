@@ -1,0 +1,28 @@
+:root {
+    --bgcol: #323238;
+    --textcol: #ffffff;
+    --linkcol: #00aaff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bgcol);
+    color: var(--textcol);
+}
+
+#text-area {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 50px;
+    box-sizing: border-box;
+    font-size: 20px;
+    line-height: 1.5;
+    background: transparent;
+    resize: none;
+    color: var(--textcol);
+    z-index: 1;
+    overflow: hidden;
+}
