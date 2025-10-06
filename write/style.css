@@ -26,3 +26,8 @@ body {
     z-index: 1;
     overflow: hidden;
 }
+
+html {
+    overflow-anchor: none;
+}
+

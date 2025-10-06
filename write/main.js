@@ -235,3 +235,10 @@ function showDocumentManager() {
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
 }
+
+document.addEventListener('input', function (event) {
+    if (event.target.id === 'text-area') {
+        event.target.style.height = 'auto';
+        event.target.style.height = event.target.scrollHeight + 'px';
+    }
+});
